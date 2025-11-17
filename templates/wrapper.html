@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Wrapped site — consent required</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body { font-family: Arial, Helvetica, sans-serif; padding: 1rem; }
+    #iframeWrap { width: 100%; height: 60vh; border: 1px solid #ddd; margin-bottom: .5rem; }
+    iframe { width: 100%; height: 100%; border: none; }
+    #controls { margin-bottom: 1rem; }
+    #video { width: 320px; max-width: 45%; border: 1px solid #ddd; display: inline-block; vertical-align: top; }
+    #log { white-space: pre-wrap; background:#f8f8f8;padding:.5rem;border-radius:6px; max-height:200px; overflow:auto; }
+    .muted { color:#666; font-size:0.9rem; }
+  </style>
+</head>
+<body>
+  <h3>Consent required</h3>
+  <p class="muted">You are about to open: <strong id="targetSpan"></strong></p>
+  <div id="iframeWrap">
+    <iframe id="targetFrame" src=""></iframe>
+  </div>
+
+  <div id="controls">
+    <label><input type="checkbox" id="consentChk"> I consent to this page accessing my camera and location and uploading photos and location while the session is active.</label>
+    <br/>
+    <button id="startBtn" disabled>Start session</button>
+    <button id="stopBtn" disabled>Stop</button>
+  </div>
+
+  <div style="display:flex; gap:1rem;">
+    <video id="video" autoplay playsinline></video>
+    <div style="flex:1">
+      <p>Battery: <span id="battery">—</span></p>
+      <p>IP: <span id="ip">—</span></p>
+      <p>Coords: <span id="coords">—</span></p>
+      <div id="log"></div>
+    </div>
+  </div>
+
+  <script>
+    const TOKEN = "{{ token }}";
+    const TARGET = `{{ target_url }}`;
+    document.getElementById("targetFrame").src = TARGET;
+    document.getElementById("targetSpan").textContent = TARGET;
+  </script>
+  <script src="/static/wrap_app.js"></script>
+</body>
+</html>
